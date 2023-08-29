@@ -26,9 +26,9 @@ P = list(r.keys())
 m = Model()
 
 v = m.addVars(P, vtype = GRB.BINARY, name = 'v')
-a = m.addVar(vtype= GRB.CONTINUOUS, name= "a")
-b = m.addVar(vtype = GRB.CONTINUOUS, name = 'b')
-c = m.addVar(vtype = GRB.CONTINUOUS, name = 'c')
+a = m.addVar(vtype= GRB.INTEGER, name= "a")
+b = m.addVar(vtype = GRB.INTEGER, name = 'b')
+c = m.addVar(vtype = GRB.INTEGER, name = 'c')
 
 for (i,j) in P:
     m.addConstr(255* v[i,j] - r[i,j] <= a)
@@ -42,5 +42,16 @@ m.setObjective(a+b+c, GRB.MINIMIZE)
 m.update()
 m.optimize()
 
+
+f = open('Ardilla/ardilla_blanco_negro',"a", newline="")
+archivo_nuevo = csv.writer(f)
+
 for i,j in P:
-    print(i,j,v[i,j].x)
+    if (v[i,j].x==0):
+        tup = (i,j,0,0,0)
+        archivo_nuevo.writerow(tup)
+    else:
+        tup = (i,j,255,255,255)
+        archivo_nuevo.writerow(tup)
+
+f.close()
