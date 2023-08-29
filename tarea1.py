@@ -42,7 +42,7 @@ m.setObjective(a+b+c, GRB.MINIMIZE)
 m.update()
 m.optimize()
 
-
+#se crea una nuevo archivo donde se guarda la informacion de la imagen que se paso a blanco y negro
 f = open('Ardilla/ardilla_blanco_negro',"a", newline="")
 archivo_nuevo = csv.writer(f)
 
