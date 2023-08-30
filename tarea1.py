@@ -37,12 +37,12 @@ for (i,j) in P:
     m.addConstr(-255* x[i,j] + r[i,j] <= a)
     m.addConstr(255* x[i,j] - v[i,j] <= b)
     m.addConstr(-255* x[i,j] + v[i,j] <= b)
-    m.addConstr(255* x[i,j] - r[i,j] <= c)
-    m.addConstr(-255* x[i,j] + r[i,j] <= c)
+    m.addConstr(255* x[i,j] - az[i,j] <= c)
+    m.addConstr(-255* x[i,j] + az[i,j] <= c)
 
 m.setObjective(a+b+c, GRB.MINIMIZE)
 m.update()
-m.optimize()
+m.optimize()    
 
 #se crea una nuevo archivo donde se guarda la informacion de la imagen que se paso a blanco y negro
 f = open('Cicla/Cicla_blanco_negro',"a", newline="")
